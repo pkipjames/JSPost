@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+   <head><title>IGNORED</title></head>
+   <body>
+      <ui:composition template="/templates/indexTemplate.xhtml">
+         
+         <ui:define name="content">
+	         <section id="content">
+		         <div id="add_letter">
+		         	<h:form>
+		         		<h:messages class="error_msgs" />
+		         		#{msgs.to_label}<br/>
+		               <h:inputText id="letter_to" value="#{letter.addressUserTo}"/><br/>
+		               #{msgs.subject_label}<br/>
+		               <h:inputText id="letter_subject" value="#{letter.letter.subject}"/><br/>
+		               <h:inputTextarea rows="20" cols="60" id="letter_message" value="#{letter.letter.message}" /><br/>
+		               <h:commandButton value="#{msgs.submit_btn}" action="#{letter.sendLetter}"/>
+		               <h:commandButton value="#{msgs.close_btn}" action="letters"/>
+		         	</h:form>
+	         	</div>
+	         </section>
+         </ui:define>
+      </ui:composition>
+   </body>
+</html>

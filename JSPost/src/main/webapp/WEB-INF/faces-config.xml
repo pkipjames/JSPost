@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+      http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+      version="2.0">
+  <application>
+  	<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+  	<locale-config>
+  		<default-locale>ru</default-locale>
+  		<supported-locale>en</supported-locale>
+  	</locale-config>
+    <resource-bundle>
+      <base-name>com.tsystems.jschool.messages.messages</base-name>
+      <var>msgs</var>
+    </resource-bundle>    
+    <message-bundle>com.tsystems.jschool.messages.messages</message-bundle>
+  </application>   
+  <factory>
+	    <render-kit-factory>org.omnifaces.renderkit.Html5RenderKitFactory</render-kit-factory>
+	</factory>           
+</faces-config>

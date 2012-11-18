@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+<head>
+<title>IGNORED</title>
+</head>
+<body>
+	<ui:composition template="/templates/indexTemplate.xhtml">
+		<ui:define name="windowTitle">
+            #{user.user.firstName}&nbsp;#{user.user.lastName}&nbsp;#{user.user.address}
+         </ui:define>
+		<ui:define name="header_buttons" />
+		<ui:define name="header_user_info" />
+		<ui:define name="leftBlock" />
+
+		<ui:define name="content">
+			<section id="content">
+			<h3>#{msgs.sign_label}</h3>
+			<h:form>
+				<h:messages styleClass="error_msgs" />
+				<h:panelGrid columns="3">
+	                   #{msgs.address_label}
+	                  <h:inputText id="login_address"
+						value="#{user.user.address}" required="true">
+						<f:ajax event="blur" render="login_address_err" />
+					</h:inputText>
+					<h:message for="login_address" id="login_address_err" />
+					
+	                  #{msgs.password_label}
+	                  <h:inputSecret id="login_password"
+						value="#{user.user.password}" required="true">
+						<f:ajax event="blur" render="login_password_err" />
+					</h:inputSecret>
+					<h:message for="login_password" id="login_password_err" />
+				</h:panelGrid>
+				<p>
+					<h:commandButton value="#{msgs.sign_btn}" action="#{user.doLogin}" />
+				</p>
+			</h:form>
+
+			<h3>#{msgs.forgot_label}</h3>
+			<h:form>
+				 #{msgs.address_label}
+	                  <h:inputText id="forgot_address"
+					value="#{user.user.address}" required="true">
+					<f:ajax event="blur" render="forgot_address_err" />
+				</h:inputText>
+				<h:message for="forgot_address" id="forgot_address_err" />
+
+				<p>
+					<h:commandLink id="forgot_link" value="#{msgs.forgot_btn}"
+						action="#{user.getPasswordHint}" immediate="true" />
+					<h:message for="forgot_link" id="forgot_link_err"
+						styleClass="error_msg" />
+				</p>
+			</h:form> </section>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

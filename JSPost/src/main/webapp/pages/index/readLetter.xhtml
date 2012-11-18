@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+       xmlns:f="http://java.sun.com/jsf/core">
+   <head><title>IGNORED</title></head>
+   <body>
+      <ui:composition template="/templates/indexTemplate.xhtml">
+         
+         <ui:define name="content">
+	         <section id="content">
+		         <div id="letter_read">
+		         	<div id="letter_sender">
+			         	<h:outputText rendered="#{letter.letterType eq 'inbox'}"
+			         	 value="#{letter.letter.from.firstName} #{letter.letter.from.lastName}&nbsp;&lt;#{letter.letter.from.address}&gt;"/>
+			         		 
+			         	<h:outputText rendered="#{letter.letterType eq 'outbox'}"
+			         	 value="#{letter.letter.to.firstName} #{letter.letter.to.lastName}&nbsp;&lt;#{letter.letter.to.address}&gt;"/>
+			         	 
+			         	 <h:outputText rendered="#{letter.letterType eq 'other' and letter.letter.to eq user.user}"
+			         	 value="#{letter.letter.from.firstName} #{letter.letter.from.lastName}&nbsp;&lt;#{letter.letter.from.address}&gt;"/>
+			         			 
+			         	<h:outputText rendered="#{letter.letterType eq 'other' and letter.letter.from eq user.user}"
+			         	 value="#{letter.letter.to.firstName} #{letter.letter.to.lastName}&nbsp;&lt;#{letter.letter.to.address}&gt;"/> 	
+			         		 
+		         	</div>
+		         	<div><h:outputText value="#{letter.letter.subject}" /></div>
+		         	<div><h:outputText value="#{letter.letter.message}" /></div>
+	         	</div>
+	         	<h:form>
+	         		#{msgs.move_to_label}
+		         	<h:selectOneMenu value="#{letter.folderToMove}" >
+	         			<f:selectItems value="#{folder.userFoldersName}" />
+		         	</h:selectOneMenu>
+		         	<h:commandButton value="#{msgs.move_btn}" action="#{letter.moveLetterToFolder}"/>
+		         	<h:commandButton value="#{msgs.delete_btn}" action="#{letter.deleteLetter}"/>
+		         	<h:commandButton value="#{msgs.close_btn}" action="letters.xhtml?faces-redirect=true"/>
+	         	</h:form>
+	         	<h2>#{msgs.responce_label}</h2>
+	         	<div id="letter_answer">
+		         	<h:form>
+		         		#{msgs.subject_label}<br/>
+		               <h:inputText id="letter_subject" value="#{letter.letterAnswer.subject}"/><br/>
+		               <h:inputTextarea rows="15" cols="60" id="letter_message" value="#{letter.letterAnswer.message}" /><br/>
+		               <h:commandButton value="#{msgs.submit_btn}" action="#{letter.sendLetterAnswer}"/>
+		               <h:commandButton value="#{msgs.close_btn}" action="letters.xhtml?faces-redirect=true"/>
+		         	</h:form>
+	         	</div>
+	         </section>
+         </ui:define>
+      </ui:composition>
+   </body>
+</html>

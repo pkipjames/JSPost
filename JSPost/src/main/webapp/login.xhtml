@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+<head>
+<title>IGNORED</title>
+</head>
+<body>
+	<ui:composition template="/templates/indexTemplate.xhtml">
+		<ui:define name="windowTitle">
+            #{msgs.sign_label}
+         </ui:define>
+		<ui:define name="header_buttons" />
+		<ui:define name="header_user_info" />
+		<ui:define name="leftBlock" />
+
+		<ui:define name="content">
+			<section id="content"> <section id="auth">
+			<h1 id="welcome_msg">#{msgs.welcome_msg}</h1>
+			<div class="auth_button">
+				<input type="button" value="#{msgs.reg_btn}" id="reg_button" />
+			</div>
+			<div style="display: none" id="reg_form">
+				<h3>#{msgs.reg_label}</h3>
+				<h:form>
+					<h:panelGrid columns="3">
+					
+			                  #{msgs.first_name_label}
+			                  <h:inputText id="first_name"
+							label="#{msgs.first_name_label}" value="#{user.user.firstName}"
+							required="true">
+							<f:ajax event="blur" render="first_name_err" />
+						</h:inputText>
+						<h:message for="first_name" id="first_name_err"
+							styleClass="error_msg" />
+							
+			                  #{msgs.last_name_label}
+			                  <h:inputText id="last_name"
+							label="#{msgs.last_name_label}" value="#{user.user.lastName}"
+							required="true">
+							<f:ajax event="blur" render="last_name_err" />
+						</h:inputText>
+						<h:message for="last_name" id="last_name_err"
+							styleClass="error_msg" />
+							
+			                  #{msgs.birth_label}
+			                  <h:inputText type="date"
+							label="#{msgs.birth_label}" id="birth_date"
+							value="#{user.user.birthDate}"
+							converter="com.tsystems.jschool.web.convert.CalendarConverter"
+							required="true">
+							<f:validateRequired />
+							<f:ajax event="blur" render="birth_date_err" />
+						</h:inputText>
+						<h:message for="birth_date" id="birth_date_err"
+							styleClass="error_msg" />
+							
+			                  #{msgs.address_label}
+			                  <h:inputText id="address"
+							label="#{msgs.address_label}" value="#{user.user.address}"
+							required="true">
+							<f:ajax event="blur" render="address_err" />
+						</h:inputText>
+						<h:message for="address" id="address_err" styleClass="error_msg" />
+						
+			                  #{msgs.phone_label}
+			                  <h:inputText required="true"
+							label="#{msgs.phone_label}" id="phone" value="#{user.user.phone}">
+							<f:validateLongRange />
+							<f:ajax event="blur" render="phone_err" />
+						</h:inputText>
+						<h:message for="phone" id="phone_err" styleClass="error_msg" />
+						
+			                  #{msgs.password_label}
+			                  <h:inputSecret id="password"
+							label="#{msgs.password_label}" value="#{user.user.password}"
+							required="true">
+							<f:ajax event="blur" render="password_err" />
+						</h:inputSecret>
+						<h:message for="password" id="password_err" styleClass="error_msg" />
+						
+						#{msgs.password_hint_label}
+						<h:inputText id="passwordHint" label="#{msgs.password_hint_label}"
+							value="#{user.user.passwordHint}" required="true">
+							<f:ajax event="blur" render="passwordHint_err" />
+						</h:inputText>
+						<h:message for="passwordHint" id="passwordHint_err"
+							styleClass="error_msg" />
+
+					</h:panelGrid>
+					<p>
+						<h:commandButton value="#{msgs.reg_btn}"
+							action="#{user.doRegister}" />
+					</p>
+				</h:form>
+			</div>
+
+			<div class="auth_button">
+				<input type="button" value="#{msgs.sign_btn}" id="sign_button" />
+			</div>
+			<div style="display: none" id="sign_form">
+				<h3>#{msgs.sign_label}</h3>
+				<h:form>
+					<h:panelGrid columns="3">
+			                  #{msgs.address_label}
+			                  <h:inputText id="login_address"
+							label="#{msgs.address_label}" value="#{user.user.address}"
+							required="true">
+							<f:ajax event="blur" render="login_address_err" />
+						</h:inputText>
+						<h:message for="login_address" id="login_address_err"
+							styleClass="error_msg" />
+			                 
+			                  #{msgs.password_label}
+			                  <h:inputSecret id="login_password"
+							label="#{msgs.password_label}" value="#{user.user.password}"
+							required="true">
+							<f:ajax event="blur" render="login_password_err" />
+						</h:inputSecret>
+						<h:message for="login_password" id="login_password_err"
+							styleClass="error_msg" />
+					</h:panelGrid>
+					<p>
+						<h:commandButton value="#{msgs.sign_btn}" action="#{user.doLogin}" />
+					</p>
+				</h:form>
+			</div>
+			</section> </section>
+		</ui:define>
+	</ui:composition>
+	<h:form>
+		<h:commandLink actionListener="#{localeConfig.changeLocale}"
+			immediate="true">
+			<f:param name="language" value="ru" />
+		</h:commandLink>
+		<h:commandLink actionListener="#{localeConfig.changeLocale}"
+			immediate="true">
+			<f:param name="language" value="en" />
+		</h:commandLink>
+	</h:form>
+</body>
+</html>

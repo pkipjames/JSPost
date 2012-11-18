@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+   <head><title>IGNORED</title></head>
+   <body>
+      <ui:composition template="/templates/indexTemplate.xhtml">
+         <ui:define name="windowTitle">
+            #{user.user.firstName}&nbsp;#{user.user.lastName}&nbsp;#{user.user.address}
+         </ui:define>
+         
+         <ui:define name="content">
+	         <section id="content">
+	         	<h:form>
+	         		<h:messages class="error_msgs" />
+	         		#{msgs.input_new_folder}<br/>
+	               <h:inputText id="folder_add" value="#{folder.folder.name}"/><br/>
+	               <h:commandButton value="#{msgs.submit_btn}" action="#{folder.createFolder}"/>
+	               <h:commandButton value="#{msgs.close_btn}" action="letters"/>
+	         	</h:form>
+	         </section>
+         </ui:define>
+      </ui:composition>
+   </body>
+</html>

@@ -1,0 +1,189 @@
+html, body {
+    height: 100%;
+    margin: 0;
+	padding: 0;
+	background: lightblue;
+}
+#page {
+	min-height:100%;
+	height:auto !important;
+	height:100%;
+	margin:0 auto 0;
+}
+#footer_push{
+	height: 1px;
+    margin: 0;
+    padding: 0;
+}
+
+footer span#copyright {
+	padding: 2px 7px;
+	border-radius: 5px;
+}
+
+img {
+	border: none
+}
+a {
+	color: #191970;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+header {
+	margin-top: 20px;
+	height: 60px;
+	background: #fff;
+	position: relative;
+}
+
+header div#language_change {
+	position: absolute;
+	right: 30px;
+	top: 10px;
+	background: #fff;
+	border-radius: 10px;
+	padding: 3px 10px 0px 4px;
+}
+header div#language_change a {
+	padding-left: 5px;
+}
+
+header div#buttons {
+	position: absolute;
+	top: 12px;
+	left: 10px;
+	background: #fff;
+	border-radius: 10px;
+	padding: 5px;
+}
+header div#user_info {
+	position: absolute;
+	right: 20px;
+	top: -18px;
+	font-weight: bold;
+	color: black;
+}
+
+nav, section#content {
+	border: 1px solid #ccc;
+	background: #B0C4DE;
+	height: 80%;
+}
+
+nav {
+	padding: 5px;
+}
+nav a {
+	padding-left: 24px;
+	font-family: monospace;
+	font-size: 20px;
+	display: block;
+	height: 90%;
+}
+
+nav .selected {
+	color: #191970 ;
+	font-weight: bold;
+	border-color: #ccc;
+}
+
+section#content {
+	margin: 1%;
+	overflow: hidden;
+	padding: 5px;
+}
+
+section#content table#letters {
+	width: 100%;
+	border-collapse: collapse;
+}
+section#content table#letters td {
+	border-bottom: 1px solid #999;
+	padding: 2px;
+}
+section#content table#letters .user {
+	width: 30%;
+}
+section#content table#letters .subject {
+	
+}
+section#content table#letters .date {
+	width: 15%;
+}
+span.to_from_label {
+	padding: 0 7px;
+	color: #999;
+	font-size: 90%;
+}
+
+
+div.auth_button {
+	padding-top: 15px;
+	margin: 0 auto;
+	width: 100%;
+	left: 10px;
+}
+div.auth_button input[type="button"] {
+	width: 100%;
+	height: 50px;
+	background: grey;
+	font-family: Arial;
+	font-size: 22px;
+	font-weight: bold;
+	text-align: left;
+	color: #fff; 
+	
+}
+
+div#reg_form, div#sign_form {
+	padding: 10px;
+	border: 1px solid #ccc;
+	margin-bottom: 15px;
+}
+
+.new_letter {
+	font-weight: bold;
+	background: #B0C4DE;
+}
+#selected_menu {
+	color: blue;
+}
+
+div#letter_read div {
+	padding: 3px;
+	margin-bottom: 5px;
+	border-bottom: 1px solid #ccc;
+}
+
+div#letter_sender {
+	font-weight: bold;
+}
+
+div#letter_answer input[type="text"], div#letter_answer textarea,
+div#add_letter input[type="text"], div#add_letter textarea {
+	width: 95%;
+}
+
+#no_letters {
+	width: 100%;
+}
+#no_letters td {
+	width: 95%;
+	text-align: center;
+	padding: 10px;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.error_msg, ul.error_msgs li {
+	color: red;
+}
+
+h1#welcome_msg {
+	font-size: 40px;
+	text-align: left;
+	color: darkblue;
+}
+

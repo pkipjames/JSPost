@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+   <f:view locale="#{localeConfig.locale}">
+	   <h:head>
+	      <title>#{msgs.app_title}&nbsp;<ui:insert name="windowTitle"/></title>
+	      <h:outputStylesheet library="css" name="style.css"/>
+	      <h:outputScript library="js" name="jquery_1.8.2.js" />
+	      <h:outputScript library="js" name="script.js" />
+	      <meta content='text/html; charset=utf-8' http-equiv='Content-Type'/>
+	   </h:head>
+	   
+	   <h:body>   
+		   <section id="page">
+		     <ui:insert name="heading">
+		        <ui:include src="/sections/index/header.xhtml"/>
+		     </ui:insert>
+		      
+		     <section id="leftBlock"> 
+			     <ui:insert name="leftBlock">
+			        <ui:include src="/sections/index/leftMenu.xhtml"/>
+			     </ui:insert>     
+		     </section>
+		      
+	         <ui:insert name="content"/>
+	         
+		     <div style="clear: both;"></div>
+	      	 <section id="footer_push"></section>
+	      </section>
+	      <footer>
+	      	<span id="copyright">&copy;&nbsp;#{msgs.copy_right}</span>
+      	  </footer>
+	      <ui:debug/>
+	   </h:body>
+   </f:view>
+</html>

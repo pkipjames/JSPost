@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+   <head><title>IGNORED</title></head>
+   <body>
+      <ui:composition>
+		<div id="user_info">
+			<h:form>
+				#{user.user.firstName}&nbsp;#{user.user.lastName}&nbsp;&nbsp;(#{user.user.address})
+				<h:commandLink action="#{user.doLogout}">
+					Exit
+				</h:commandLink>
+			</h:form>		
+		</div>
+      </ui:composition>
+   </body>
+</html>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+
+    <persistence-unit name="ApplicationEntityManager" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <class>com.tsystems.jschool.model.User</class>
+        <class>com.tsystems.jschool.model.Letter</class>
+        <class>com.tsystems.jschool.model.Folder</class>
+        <class>com.tsystems.jschool.model.UserRole</class>         
+    </persistence-unit>
+    
+</persistence>

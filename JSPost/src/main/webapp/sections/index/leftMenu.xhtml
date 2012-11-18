@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<head>
+<title>IGNORED</title>
+</head>
+<body>
+	<ui:composition>
+		<nav> <!-- <f:ajax render=":letters" > --> <h:form>
+			<div id="inbox">
+				<h:commandLink id="inbox_link" action="#{letter.getUserLetters}"
+					immediate="true"
+					styleClass="#{letter.letterType eq 'inbox' ? 'selected' : ''}">
+					<f:param name="letterType" value="inbox" />
+						 #{msgs.inbox_list_item}
+					</h:commandLink>
+			</div>
+			<div id="outbox">
+				<h:commandLink id="outbox_link" action="#{letter.getUserLetters}"
+					immediate="true"
+					styleClass="#{letter.letterType eq 'outbox' ? 'selected' : ''}">
+					<f:param name="letterType" value="outbox" />
+						 #{msgs.outbox_list_item}
+					</h:commandLink>
+			</div>
+			<div id="trash">
+				<h:commandLink action="#{letter.getUserLetters}" immediate="true"
+					styleClass="#{letter.letterType eq 'trash' ? 'selected' : ''}">
+					<f:param name="letterType" value="trash" />
+						 #{msgs.trash_list_item}
+					</h:commandLink>
+			</div>
+			<hr />
+			<ui:repeat var="row" value="#{folder.userFoldersName}"
+				varStatus="status">
+				<div class="other">
+					<h:commandLink action="#{letter.getUserLettersByFolder}"
+						immediate="true"
+						styleClass="#{letter.folderName eq folder.userFoldersName[status.index] ? 'selected' : ''}">
+						<f:param name="folderName" value="#{row}" />
+						<f:param name="letterType" value="other" />
+							 #{row}
+						</h:commandLink>
+				</div>
+			</ui:repeat>
+
+		</h:form> <!-- </f:ajax> --> </nav>
+	</ui:composition>
+</body>
+</html>

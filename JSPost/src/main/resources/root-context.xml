@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="emf" />
+	</bean>
+
+	<import resource="security.xml" />
+
+	<bean id="emf"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<!-- <property name="dataSource" ref="dataSource" /> -->
+		<property name="persistenceUnitManager" ref="persistenceUnitManager" />
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.connection.url">${connectionURL}</prop>
+				<prop key="hibernate.connection.driver_class">${connectionDriverName}</prop>
+				<prop key="hibernate.connection.username">${connectionUserName}</prop>
+				<prop key="hibernate.connection.password">${connectionPassword}</prop>
+				<prop key="hibernate.dialect">${connectionDialect}</prop>
+				<prop key="hibernate.show_sql">${show_sql}</prop>
+				<prop key="hibernate.hbm2ddl.auto">${hbm2ddl.auto}</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="persistenceUnitManager"
+		class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
+		<property name="persistenceXmlLocations">
+			<list>
+				<value>classpath:META-INF/persistence.xml</value>
+			</list>
+		</property>
+		<property name="defaultDataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="locations">
+			<list>
+				<value>classpath:jdbc.connect.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${connectionDriverName}" />
+		<property name="url" value="${connectionURL}" />
+		<property name="username" value="${connectionUserName}" />
+		<property name="password" value="${connectionPassword}" />
+	</bean>
+
+	<!-- Needed so the @PersistenceUnit annotation is recognized -->
+	<bean
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+	<!-- DAOs -->
+	<bean id="userDao" class="com.tsystems.jschool.dao.impl.UserDaoImpl">
+	</bean>
+	<bean id="folderDao" class="com.tsystems.jschool.dao.impl.FolderDaoImpl">
+	</bean>
+	<bean id="letterDao" class="com.tsystems.jschool.dao.impl.LetterDaoImpl">
+	</bean>
+
+	<!-- Services -->
+	<bean id="userService" class="com.tsystems.jschool.service.impl.UserServiceImpl">
+		<constructor-arg ref="userDao" />
+	</bean>
+	<bean id="folderService" class="com.tsystems.jschool.service.impl.FolderServiceImpl">
+		<constructor-arg ref="folderDao" />
+	</bean>
+	<bean id="letterService" class="com.tsystems.jschool.service.impl.LetterServiceImpl">
+		<constructor-arg ref="letterDao" />
+	</bean>
+
+	<context:property-placeholder location="classpath:jdbc.connect.properties" />
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!-- Activates scanning of @Autowired -->
+	<context:annotation-config />
+
+	<context:component-scan base-package="com.tsystems.jschool" />
+</beans>

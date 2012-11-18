@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+<head>
+<title>IGNORED</title>
+</head>
+<body>
+	<ui:composition template="/templates/indexTemplate.xhtml">
+		<ui:define name="windowTitle">
+            #{user.user.firstName}&nbsp;#{user.user.lastName}&nbsp;&nbsp;#{user.user.address}; 
+         </ui:define>
+
+		<ui:define name="content">
+			<section id="content"> <h:dataTable
+				value="#{letter.letters}" id="letters" var="row"
+				rowClasses="#{letter.rowCssClasses}"
+				columnClasses="user, subject, date">
+				<h:column rendered="#{letter.letterType eq 'inbox'}">
+					<h:form>
+						<h:commandLink action="#{letter.readLetter}">
+			         				#{row.from.firstName} #{row.from.lastName}&nbsp;&nbsp;(#{row.from.address})
+			         				<f:param name="idLetter" value="#{row.id}" />
+						</h:commandLink>
+					</h:form>
+				</h:column>
+				<h:column rendered="#{letter.letterType eq 'outbox'}">
+					<h:form>
+						<h:commandLink action="#{letter.readLetter}">
+			         				#{row.to.firstName} #{row.to.lastName}&nbsp;&nbsp;(#{row.to.address})
+			         				<f:param name="idLetter" value="#{row.id}" />
+						</h:commandLink>
+					</h:form>
+				</h:column>
+				<h:column
+					rendered="#{letter.letterType eq 'trash' or letter.letterType eq 'other'}">
+					<h:form>
+						<h:commandLink action="#{letter.readLetter}"
+							rendered="#{row.from eq user.user}">
+			         				#{row.to.firstName} #{row.to.lastName}&nbsp;&nbsp;(#{row.to.address})
+			         				<f:param name="idLetter" value="#{row.id}" />
+						</h:commandLink>
+						<h:commandLink action="#{letter.readLetter}"
+							rendered="#{row.to eq user.user}">
+			         				#{row.from.firstName} #{row.from.lastName}&nbsp;&nbsp;;(#{row.from.address})&nbsp;;
+			         				<f:param name="idLetter" value="#{row.id}" />
+						</h:commandLink>
+						<h:outputText styleClass="to_from_label"
+							rendered="#{row.from eq user.user}"
+							value="#{msgs.outbox_list_item}" />
+						<h:outputText styleClass="to_from_label"
+							rendered="#{row.to eq user.user}" value="#{msgs.inbox_list_item}" />
+					</h:form>
+				</h:column>
+				<h:column>#{row.subject}</h:column>
+				<h:column>
+					<h:outputText value="#{row.date}">
+						<f:converter
+							converterId="com.tsystems.jschool.web.convert.CalendarConverter" />
+						<f:attribute name="datePattern" value="dd-MM-yyyy H:m:s" />
+					</h:outputText>
+				</h:column>
+			</h:dataTable> <h:panelGrid rendered="#{letter.letters.size() == 0}"
+				id="no_letters">
+		         		#{msgs.letters_empty}
+		         	</h:panelGrid> </section>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>
